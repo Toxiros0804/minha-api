@@ -1,0 +1,22 @@
+name: Pipeline CI
+
+on: [push, pull_request]
+
+jobs:
+  verificar-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: |
+          pip install fastapi uvicorn pytest httpx
+
+      - name: Rodar Testes
+        run: pytest
